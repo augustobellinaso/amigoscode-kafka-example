@@ -30,10 +30,12 @@ public class KafkaConsumerConfig {
 
 	@Bean
 	public ConsumerFactory<String, Message> consumerFactory() {
+		JsonDeserializer<Message> jsonDeserializer = new JsonDeserializer<>();
+		jsonDeserializer.addTrustedPackages("com.amigoscode");
 		return new DefaultKafkaConsumerFactory<>(
 				consumerConfig(),
 				new StringDeserializer(),
-				new JsonDeserializer<>());
+				jsonDeserializer);
 	}
 
 	@Bean
